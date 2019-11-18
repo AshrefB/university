@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,11 @@ public class Teacher implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int cin;
+    @NotBlank(message = "CIN cannot be blank")
+    @Size(min = 8, max = 8, message = "CIN should be 8 numbers")
+    private String cin;
+    @NotBlank(message = "Name cannot be blank")
+    @Size(max = 45, message = "Name cannot be longer than 45 character")
     private String name;
     @JsonIgnore
     @ManyToMany(mappedBy = "teachers")

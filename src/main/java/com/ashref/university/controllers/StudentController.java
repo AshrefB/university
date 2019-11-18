@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class StudentController {
 
     @PostMapping("/add")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Student addStudent(@RequestBody Student student) {
+    public Student addStudent(@Valid  @RequestBody Student student) {
         return studentService.addStudent(student);
     }
 

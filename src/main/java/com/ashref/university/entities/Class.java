@@ -10,6 +10,9 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +25,10 @@ public class Class implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "Name cannot be blank")
+    @Size(max = 45, message = "Name cannot be longer than 45 character")
     private String name;
+    @Positive(message = "Max number should be positive")
     private int maxNum;
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "aClass")
